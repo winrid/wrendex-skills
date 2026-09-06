@@ -1,0 +1,12 @@
+{
+  "name": "Duplicate Content",
+  "types": [
+    "IDENTICAL_CONTENT",
+    "DUPLICATES_NO_CANONICAL",
+    "DUPLICATE_TITLE",
+    "DUPLICATE_META_DESCRIPTION",
+    "DUPLICATE_H1",
+    "NON_CANONICAL_AS_CANONICAL",
+    "LOW_WORD_COUNT"
+  ]
+}

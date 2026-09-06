@@ -1,0 +1,15 @@
+{
+  "name": "Render-Blocking Resources",
+  "types": [
+    "RENDER_BLOCKING_CSS",
+    "RENDER_BLOCKING_JS",
+    "BROKEN_CSS",
+    "OVERSIZED_CSS",
+    "REDIRECTED_CSS",
+    "BROKEN_JS",
+    "OVERSIZED_JS",
+    "REDIRECTED_JS",
+    "DUPLICATE_JS_CODE",
+    "DUPLICATE_CSS_CODE"
+  ]
+}

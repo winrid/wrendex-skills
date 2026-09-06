@@ -1,0 +1,15 @@
+{
+  "name": "Sitemap Audit",
+  "types": [
+    "SITEMAP_3XX_REDIRECT",
+    "SITEMAP_4XX",
+    "SITEMAP_403_FORBIDDEN",
+    "SITEMAP_5XX",
+    "SITEMAP_NOINDEX",
+    "SITEMAP_NON_CANONICAL",
+    "SITEMAP_TIMEOUT",
+    "INVALID_SITEMAP_FORMAT",
+    "MISSING_FROM_SITEMAP",
+    "DUPLICATE_IN_SITEMAPS"
+  ]
+}

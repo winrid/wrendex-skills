@@ -1,0 +1,14 @@
+{
+  "name": "Core Web Vitals",
+  "types": [
+    "SLOW_PAGE",
+    "OVERSIZED_HTML",
+    "NO_COMPRESSION",
+    "SLOW_TTFB",
+    "MISSING_ALT_TEXT",
+    "BROKEN_IMAGE",
+    "OVERSIZED_IMAGE",
+    "IMAGE_REDIRECT",
+    "MISSING_IMAGE_DIMENSIONS"
+  ]
+}

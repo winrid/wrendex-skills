@@ -1,0 +1,12 @@
+{
+  "name": "robots.txt",
+  "types": [
+    "ROBOTS_TXT_INACCESSIBLE",
+    "NOINDEX_PAGE",
+    "NOFOLLOW_PAGE",
+    "NOINDEX_FOLLOW",
+    "NOINDEX_NOFOLLOW",
+    "NOINDEX_CONFLICT",
+    "NOFOLLOW_CONFLICT"
+  ]
+}

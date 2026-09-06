@@ -1,0 +1,16 @@
+{
+  "name": "wrendex-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent skills for technical SEO audits, powered by Wrendex",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node tools/build-skills.mjs",
+    "sync-catalog": "node tools/sync-catalog.mjs",
+    "check": "node tools/build-skills.mjs && git diff --exit-code skills/"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Technical SEO",
+  "types": [
+    "NOINDEX_PAGE",
+    "NOFOLLOW_PAGE",
+    "NOINDEX_FOLLOW",
+    "NOINDEX_NOFOLLOW",
+    "NOINDEX_CONFLICT",
+    "NOFOLLOW_CONFLICT",
+    "HTTP_404",
+    "HTTP_403",
+    "HTTP_409",
+    "HTTP_4XX",
+    "HTTP_500",
+    "HTTP_5XX",
+    "INVALID_LANG",
+    "MISSING_VIEWPORT",
+    "ROBOTS_TXT_INACCESSIBLE",
+    "LOW_WORD_COUNT",
+    "HTTPS_LINKS_TO_HTTP",
+    "HTTP_LINKS_TO_HTTPS",
+    "HTTPS_CSS_TO_HTTP",
+    "HTTPS_JS_TO_HTTP",
+    "HTTPS_IMG_TO_HTTP"
+  ]
+}
