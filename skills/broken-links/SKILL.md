@@ -1,6 +1,6 @@
 ---
-name: broken-links
-description: Find and fix broken links, 404s, dead external URLs and links pointing at redirects across a site. Use when the user says "check for broken links", "find 404s", "my links are dead", "link audit", "link rot", or is cleaning up internal linking before a launch.
+name: 'broken-links'
+description: 'Find and fix broken links, 404s, dead external URLs and links pointing at redirects across a site. Use when the user says "check for broken links", "find 404s", "my links are dead", "link audit", "link rot", or is cleaning up internal linking before a launch.'
 ---
 
 # Broken Links

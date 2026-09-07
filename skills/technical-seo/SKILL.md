@@ -1,6 +1,6 @@
 ---
-name: technical-seo
-description: Audit the technical SEO of a site: crawlability, indexability, noindex/nofollow conflicts, HTTP status codes, robots.txt, mixed content and viewport tags. Use when the user says "technical SEO", "is my site crawlable", "Google is not indexing my pages", "pages missing from search", or "technical audit".
+name: 'technical-seo'
+description: 'Audit the technical SEO of a site: crawlability, indexability, noindex/nofollow conflicts, HTTP status codes, robots.txt, mixed content and viewport tags. Use when the user says "technical SEO", "is my site crawlable", "Google is not indexing my pages", "pages missing from search", or "technical audit".'
 ---
 
 # Technical SEO

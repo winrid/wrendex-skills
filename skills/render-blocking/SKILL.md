@@ -1,6 +1,6 @@
 ---
-name: render-blocking
-description: Find render-blocking CSS and JavaScript, oversized or broken bundles, and code duplicated across bundles that ships to the browser twice. Use when the user says "render-blocking", "my site loads slowly", "too much JavaScript", "duplicate scripts", "duplicate trackers", or "reduce bundle size".
+name: 'render-blocking'
+description: 'Find render-blocking CSS and JavaScript, oversized or broken bundles, and code duplicated across bundles that ships to the browser twice. Use when the user says "render-blocking", "my site loads slowly", "too much JavaScript", "duplicate scripts", "duplicate trackers", or "reduce bundle size".'
 ---
 
 # Render-Blocking Resources

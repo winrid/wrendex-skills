@@ -1,6 +1,6 @@
 ---
-name: core-web-vitals
-description: Audit the page-weight and server-response side of Core Web Vitals: slow TTFB, missing compression, oversized HTML, and the oversized or undimensioned images behind poor LCP and CLS. Use when the user says "core web vitals", "my site is slow", "improve LCP", "layout shift", "TTFB", or "PageSpeed score".
+name: 'core-web-vitals'
+description: 'Audit the page-weight and server-response side of Core Web Vitals: slow TTFB, missing compression, oversized HTML, and the oversized or undimensioned images behind poor LCP and CLS. Use when the user says "core web vitals", "my site is slow", "improve LCP", "layout shift", "TTFB", or "PageSpeed score".'
 ---
 
 # Core Web Vitals

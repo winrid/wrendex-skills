@@ -1,6 +1,6 @@
 ---
-name: seo-audit
-description: Run a full technical SEO audit of a site and get a ranked, per-URL list of what to fix. Use when the user says "audit my site", "run an SEO audit", "check my SEO", "why is my site not ranking", "find SEO problems", or wants a health check before a launch or migration.
+name: 'seo-audit'
+description: 'Run a full technical SEO audit of a site and get a ranked, per-URL list of what to fix. Use when the user says "audit my site", "run an SEO audit", "check my SEO", "why is my site not ranking", "find SEO problems", or wants a health check before a launch or migration.'
 ---
 
 # SEO Audit

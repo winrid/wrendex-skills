@@ -72,6 +72,14 @@ function categoryTable(entries) {
   return ['| Category | Checks |', '| --- | --- |', ...rows].join('\n');
 }
 
+// Frontmatter values go through a YAML parser. A description almost always
+// contains ": " (a colon inside a trigger phrase), which unquoted reads as a
+// nested mapping and makes the whole SKILL.md unparseable - the installer then
+// skips the skill silently. Single-quoted style needs only '' doubling.
+function yamlString(value) {
+  return `'${String(value).replace(/'/g, "''")}'`;
+}
+
 function skillMd(skill, entries, wildcard) {
   if (skill.description.length > DESCRIPTION_LIMIT) {
     throw new Error(`${skill.slug}: description is ${skill.description.length} chars, limit is ${DESCRIPTION_LIMIT}`);
@@ -87,8 +95,8 @@ function skillMd(skill, entries, wildcard) {
     : `${categoryTable(entries)}\n\nEvery check, with what it means and how to fix it, is in [references/checks.md](references/checks.md).`;
 
   return `---
-name: ${skill.slug}
-description: ${skill.description}
+name: ${yamlString(skill.slug)}
+description: ${yamlString(skill.description)}
 ---
 
 # ${skill.title}
@@ -212,6 +220,36 @@ with \`?category=<Category>\`.
 ${sections.join('\n')}`;
 }
 
+// Read the frontmatter back the way an installer does. `npx skills add` skips
+// a SKILL.md whose YAML does not parse, with a warning that is easy to miss in
+// a long install log, so the build fails here instead.
+function assertFrontmatterParses(skill, md) {
+  const m = md.match(/^---\n([\s\S]*?)\n---\n/);
+  if (!m) throw new Error(`${skill.slug}: SKILL.md has no frontmatter block`);
+
+  const fields = {};
+  for (const line of m[1].split('\n')) {
+    const kv = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!kv) throw new Error(`${skill.slug}: frontmatter line is not a scalar mapping: ${line}`);
+
+    let value = kv[2];
+    if (value.startsWith("'") && value.endsWith("'") && value.length > 1) {
+      value = value.slice(1, -1).replace(/''/g, "'");
+    } else if (value.includes(': ')) {
+      // Exactly the case that made the installer skip the file.
+      throw new Error(`${skill.slug}: unquoted "${kv[1]}" contains ": " and will not parse as YAML`);
+    }
+    fields[kv[1]] = value;
+  }
+
+  if (fields.name !== skill.slug) {
+    throw new Error(`${skill.slug}: frontmatter name round-tripped as "${fields.name}"`);
+  }
+  if (fields.description !== skill.description) {
+    throw new Error(`${skill.slug}: frontmatter description did not round-trip`);
+  }
+}
+
 function build() {
   const outRoot = join(ROOT, 'skills');
   if (existsSync(outRoot)) rmSync(outRoot, { recursive: true });
@@ -246,7 +284,9 @@ function build() {
       ) + '\n',
     );
 
-    const lines = readFileSync(join(dir, 'SKILL.md'), 'utf8').split('\n').length;
+    const md = readFileSync(join(dir, 'SKILL.md'), 'utf8');
+    assertFrontmatterParses(skill, md);
+    const lines = md.split('\n').length;
     if (lines > 500) throw new Error(`${skill.slug}: SKILL.md is ${lines} lines, limit is 500`);
     process.stdout.write(
       `  ${skill.slug.padEnd(18)} ${String(entries.length).padStart(3)} checks  ${lines} lines\n`,

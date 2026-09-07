@@ -1,6 +1,6 @@
 ---
-name: structured-data
-description: Validate JSON-LD structured data across a site against schema.org and against Google rich-result requirements: parse errors, invalid or deprecated types and properties, missing required fields, unresolved @id references and bad dates. Use when the user says "structured data", "schema markup", "JSON-LD", "rich results", "rich snippets", or "Search Console structured data errors".
+name: 'structured-data'
+description: 'Validate JSON-LD structured data across a site against schema.org and against Google rich-result requirements: parse errors, invalid or deprecated types and properties, missing required fields, unresolved @id references and bad dates. Use when the user says "structured data", "schema markup", "JSON-LD", "rich results", "rich snippets", or "Search Console structured data errors".'
 ---
 
 # Structured Data

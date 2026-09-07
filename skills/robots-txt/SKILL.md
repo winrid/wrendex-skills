@@ -1,6 +1,6 @@
 ---
-name: robots-txt
-description: Check robots.txt and the indexing directives around it: an unreachable robots.txt, noindex and nofollow pages, and conflicting meta-tag versus header signals. Use when the user says "robots.txt", "am I blocking Google", "noindex", "nofollow", or "my pages are excluded from search".
+name: 'robots-txt'
+description: 'Check robots.txt and the indexing directives around it: an unreachable robots.txt, noindex and nofollow pages, and conflicting meta-tag versus header signals. Use when the user says "robots.txt", "am I blocking Google", "noindex", "nofollow", or "my pages are excluded from search".'
 ---
 
 # robots.txt

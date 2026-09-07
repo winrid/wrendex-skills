@@ -1,6 +1,6 @@
 ---
-name: sitemap-audit
-description: Audit XML sitemaps: URLs that 404 or redirect, noindex or non-canonical entries, pages missing from the sitemap entirely, duplicates across sitemap files, and malformed XML. Use when the user says "check my sitemap", "sitemap.xml", "sitemap errors in Search Console", or "my sitemap is out of date".
+name: 'sitemap-audit'
+description: 'Audit XML sitemaps: URLs that 404 or redirect, noindex or non-canonical entries, pages missing from the sitemap entirely, duplicates across sitemap files, and malformed XML. Use when the user says "check my sitemap", "sitemap.xml", "sitemap errors in Search Console", or "my sitemap is out of date".'
 ---
 
 # Sitemap Audit

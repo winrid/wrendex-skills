@@ -1,6 +1,6 @@
 ---
-name: duplicate-content
-description: Find duplicate content across a site: identical page bodies, repeated titles and meta descriptions, duplicate H1s and thin pages, plus the missing canonicals behind them. Use when the user says "duplicate content", "duplicate titles", "my pages are competing", "thin content", or "canonicalization issues".
+name: 'duplicate-content'
+description: 'Find duplicate content across a site: identical page bodies, repeated titles and meta descriptions, duplicate H1s and thin pages, plus the missing canonicals behind them. Use when the user says "duplicate content", "duplicate titles", "my pages are competing", "thin content", or "canonicalization issues".'
 ---
 
 # Duplicate Content
