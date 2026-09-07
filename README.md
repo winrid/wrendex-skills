@@ -11,13 +11,13 @@ Ten skills, one crawl engine, 143 checks.
 Everything:
 
 ```bash
-npx skills add wrendex/wrendex-skills
+npx skills add winrid/wrendex-skills
 ```
 
 Or just the one you want:
 
 ```bash
-npx skills add wrendex/wrendex-skills --skill broken-links
+npx skills add winrid/wrendex-skills --skill broken-links
 ```
 
 | Skill | What it finds |
