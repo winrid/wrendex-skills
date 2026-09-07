@@ -32,7 +32,7 @@ affected - that needs a workspace.
 
 ```bash
 node scripts/wrendex.mjs signup                          # once per machine
-node scripts/wrendex.mjs audit https://example.com --wait
+node scripts/wrendex.mjs audit https://example.com --wait --max-pages 200
 node scripts/wrendex.mjs issues <crawlId>
 ```
 
@@ -42,10 +42,11 @@ node scripts/wrendex.mjs issues <crawlId>
 of the workspace. Until someone does, the workspace cannot be funded and is
 deleted after 7 days.
 
-Crawling costs credits, so a brand-new workspace answers `audit` with
-`{"ok": false, "code": "NO_CREDITS"}` and the claim link. That is expected on
-a first run, not a bug - pass the link to the user and use `preview` in the
-meantime.
+A new workspace starts with **500 free credits** - one per page fetched, two
+when JS rendering is on - so the first audit runs immediately, before anyone
+pays. Cap a large site with `--max-pages` to make them last. When they run
+out, `audit` returns `{"ok": false, "code": "NO_CREDITS"}` with the claim
+link: the workspace has to be claimed before it can be funded.
 
 ## Reading the output
 

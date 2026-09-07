@@ -9,7 +9,7 @@
 //
 //   node scripts/wrendex.mjs preview <url>              anonymous scan, no account
 //   node scripts/wrendex.mjs signup [--name <name>]     mint a workspace + token
-//   node scripts/wrendex.mjs audit <url> [--wait]       crawl a site you control
+//   node scripts/wrendex.mjs audit <url> [--wait] [--max-pages N]
 //   node scripts/wrendex.mjs status <crawlId>
 //   node scripts/wrendex.mjs issues <crawlId> [--all]   ranked fix list
 //   node scripts/wrendex.mjs whoami
@@ -153,7 +153,7 @@ async function requireCreds() {
     'No Wrendex credentials. Run: node scripts/wrendex.mjs signup');
 }
 
-async function findOrCreateSite(creds, url) {
+async function findOrCreateSite(creds, url, maxPages) {
   const base = baseUrl(creds).replace(/\/api$/, '');
   const sites = await api(`/api/tenants/${creds.tenantId}/sites`, { token: creds.token, base });
 
@@ -161,11 +161,16 @@ async function findOrCreateSite(creds, url) {
   const hit = (sites || []).find((s) => norm(s.url) === norm(url));
   if (hit) return { site: hit, created: false };
 
+  // An unverified site is capped at Site.UNVERIFIED_MAX_PAGES server-side;
+  // asking for more comes back as 409 VERIFICATION_REQUIRED.
+  const body = { url };
+  if (maxPages) body.maxPages = Number(maxPages);
+
   const site = await api(`/api/tenants/${creds.tenantId}/sites`, {
     method: 'POST',
     token: creds.token,
     base,
-    body: { url },
+    body,
   });
   return { site, created: true };
 }
@@ -177,7 +182,7 @@ async function cmdAudit(args) {
   const creds = await requireCreds();
   const base = baseUrl(creds).replace(/\/api$/, '');
 
-  const { site, created } = await findOrCreateSite(creds, url);
+  const { site, created } = await findOrCreateSite(creds, url, args['max-pages']);
   log(`${created ? 'Added' : 'Found'} site ${site.url} (${site.id})`);
 
   let run;
@@ -194,9 +199,9 @@ async function cmdAudit(args) {
         siteId: site.id,
         claimUrl: creds.claimUrl || null,
         handToUser: creds.claimUrl
-          ? `This workspace has no crawl credits yet. Open ${creds.claimUrl} to claim it, `
-            + `then add credits to run the audit.`
-          : 'This workspace has no crawl credits. Claim and fund it, then re-run the audit.',
+          ? `This workspace is out of crawl credits. Open ${creds.claimUrl} to claim it, `
+            + `then add credits to keep auditing.`
+          : 'This workspace is out of crawl credits. Claim and fund it, then re-run the audit.',
         alternative: 'For a free scan with no account, run: node scripts/wrendex.mjs preview ' + url,
       });
       process.exitCode = 3;
