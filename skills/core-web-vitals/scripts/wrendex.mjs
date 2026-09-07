@@ -132,10 +132,14 @@ async function cmdSignup(args) {
     createdAt: new Date().toISOString(),
   });
 
-  log(`Workspace created. Token saved to ${CRED_FILE} (mode 0600).`);
+  log(`Workspace created with ${r.creditBalance ?? 0} credits. `
+    + `Token saved to ${CRED_FILE} (mode 0600).`);
   emit({
     ok: true,
     tenantId: creds.tenantId,
+    // Welcome credits: one per page fetched, two with JS rendering. Read it
+    // rather than assuming a crawl will go through.
+    creditBalance: r.creditBalance ?? 0,
     claimUrl: r.claimUrl,
     claimExpiresAt: r.claimExpiresAt,
     mcpEndpoint: r.mcpEndpoint,
