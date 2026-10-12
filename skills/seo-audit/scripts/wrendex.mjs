@@ -9,7 +9,7 @@
 //
 //   node scripts/wrendex.mjs preview <url>              anonymous scan, no account
 //   node scripts/wrendex.mjs signup [--name <name>]     mint a workspace + token
-//   node scripts/wrendex.mjs audit <url> [--wait] [--max-pages N]
+//   node scripts/wrendex.mjs audit <url> [--wait] [--max-pages N] [--full]
 //   node scripts/wrendex.mjs status <crawlId>
 //   node scripts/wrendex.mjs issues <crawlId> [--all]   ranked fix list
 //   node scripts/wrendex.mjs whoami
@@ -181,7 +181,7 @@ async function findOrCreateSite(creds, url, maxPages) {
 
 async function cmdAudit(args) {
   const url = args._[0];
-  if (!url) throw new ApiError(0, 'BAD_USAGE', 'Usage: wrendex.mjs audit <url> [--wait]');
+  if (!url) throw new ApiError(0, 'BAD_USAGE', 'Usage: wrendex.mjs audit <url> [--wait] [--max-pages N] [--full]');
 
   const creds = await requireCreds();
   const base = baseUrl(creds).replace(/\/api$/, '');
@@ -189,13 +189,19 @@ async function cmdAudit(args) {
   const { site, created } = await findOrCreateSite(creds, url, args['max-pages']);
   log(`${created ? 'Added' : 'Found'} site ${site.url} (${site.id})`);
 
+  // Re-crawls are incremental by default (unchanged pages carried forward
+  // free); --full asks the server to re-fetch and bill every page.
+  const crawlBody = args.full ? { mode: 'full' } : undefined;
+
   let run;
   try {
-    run = await api(`/api/sites/${site.id}/crawls`, { method: 'POST', token: creds.token, base });
+    run = await api(`/api/sites/${site.id}/crawls`, {
+      method: 'POST', token: creds.token, base, body: crawlBody,
+    });
   } catch (e) {
-    // A fresh workspace has a zero credit balance, so this is the expected
-    // first-run outcome until someone claims and funds it. Say so precisely
-    // rather than surfacing a bare 402.
+    // The workspace is out of credits: its signup grant is spent and nobody
+    // has funded it yet, which needs a claimed owner. Say so precisely rather
+    // than surfacing a bare 402.
     if (e.status === 402) {
       emit({
         ok: false,

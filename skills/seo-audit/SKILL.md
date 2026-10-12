@@ -45,9 +45,13 @@ deleted after 7 days.
 
 A new workspace starts with **500 free credits** - one per page fetched, two
 when JS rendering is on - so the first audit runs immediately, before anyone
-pays. Cap a large site with `--max-pages` to make them last. When they run
-out, `audit` returns `{"ok": false, "code": "NO_CREDITS"}` with the claim
-link: the workspace has to be claimed before it can be funded.
+pays. Cap a large site with `--max-pages` to make them last. Re-auditing a
+site is incremental: pages whose sitemap lastmod has not moved, or that the
+server answers 304 Not Modified, are carried forward free, apart from a small
+rotating slice (5% by default) re-verified each run; add `--full` to
+re-fetch every page. When credits run out, `audit` returns
+`{"ok": false, "code": "NO_CREDITS"}` with the claim link: the workspace has
+to be claimed before it can be funded.
 
 ## Reading the output
 
