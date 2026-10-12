@@ -137,8 +137,9 @@ async function cmdSignup(args) {
   emit({
     ok: true,
     tenantId: creds.tenantId,
-    // Welcome credits: one per page fetched, two with JS rendering. Read it
-    // rather than assuming a crawl will go through.
+    // The free monthly allowance (5,000, reset on the 1st): one per page
+    // fetched, two with JS rendering. Read it rather than assuming a crawl
+    // will go through.
     creditBalance: r.creditBalance ?? 0,
     claimUrl: r.claimUrl,
     claimExpiresAt: r.claimExpiresAt,
@@ -199,9 +200,9 @@ async function cmdAudit(args) {
       method: 'POST', token: creds.token, base, body: crawlBody,
     });
   } catch (e) {
-    // The workspace is out of credits: its signup grant is spent and nobody
-    // has funded it yet, which needs a claimed owner. Say so precisely rather
-    // than surfacing a bare 402.
+    // The workspace is out of credits: this month's free allowance is spent
+    // and nobody has bought more, which needs a claimed owner. Say so
+    // precisely rather than surfacing a bare 402.
     if (e.status === 402) {
       emit({
         ok: false,
@@ -209,9 +210,10 @@ async function cmdAudit(args) {
         siteId: site.id,
         claimUrl: creds.claimUrl || null,
         handToUser: creds.claimUrl
-          ? `This workspace is out of crawl credits. Open ${creds.claimUrl} to claim it, `
-            + `then add credits to keep auditing.`
-          : 'This workspace is out of crawl credits. Claim and fund it, then re-run the audit.',
+          ? `This workspace has used its free credits for the month. Open ${creds.claimUrl} to claim it, `
+            + `then buy a credit pack to keep auditing, or wait for the 1st when the allowance resets.`
+          : 'This workspace has used its free credits for the month. Claim it and buy a credit pack, '
+            + 'or wait for the 1st when the allowance resets, then re-run the audit.',
         alternative: 'For a free scan with no account, run: node scripts/wrendex.mjs preview ' + url,
       });
       process.exitCode = 3;

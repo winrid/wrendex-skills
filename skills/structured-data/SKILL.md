@@ -43,15 +43,17 @@ node scripts/wrendex.mjs issues <crawlId>
 of the workspace. Until someone does, the workspace cannot be funded and is
 deleted after 7 days.
 
-A new workspace starts with **500 free credits** - one per page fetched, two
-when JS rendering is on - so the first audit runs immediately, before anyone
-pays. Cap a large site with `--max-pages` to make them last. Re-auditing a
-site is incremental: pages whose sitemap lastmod has not moved, or that the
-server answers 304 Not Modified, are carried forward free, apart from a small
-rotating slice (5% by default) re-verified each run; add `--full` to
-re-fetch every page. When credits run out, `audit` returns
-`{"ok": false, "code": "NO_CREDITS"}` with the claim link: the workspace has
-to be claimed before it can be funded.
+Every workspace gets **5,000 free credits a month**, reset on the 1st - one
+per page fetched, two when JS rendering is on - so the first audit runs
+immediately, before anyone pays, and a small site can be re-audited forever
+for nothing. Cap a large site with `--max-pages` to make them last.
+Re-auditing a site is incremental: pages whose sitemap lastmod has not moved,
+or that the server answers 304 Not Modified, are carried forward free, apart
+from a small rotating slice (5% by default) re-verified each run; add
+`--full` to re-fetch every page. When the month's credits run out, `audit`
+returns `{"ok": false, "code": "NO_CREDITS"}` with the claim link: the
+workspace has to be claimed before it can buy a credit pack (from $19.99, never
+expires) or a plan, or it can simply wait for the 1st.
 
 ## Reading the output
 
